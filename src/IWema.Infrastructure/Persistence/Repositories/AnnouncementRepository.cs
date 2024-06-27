@@ -52,7 +52,7 @@ public class AnnouncementRepository(IWemaDbContext context) : IAnnouncementRepos
                 Date,
                 ImageLocation,
                 Content,
-                COALESCE(Link, '') AS Link,
+                COALESCE(Link, '') AS Link
                 
             FROM Announcements
             WHERE Id = {0}";
@@ -84,8 +84,7 @@ public class AnnouncementRepository(IWemaDbContext context) : IAnnouncementRepos
                 Date,
                 ImageLocation,
                 Content,
-                COALESCE(Link, '') AS Link,
-                FileName
+                COALESCE(Link, '') AS Link
             FROM Announcements";
 
         var result = await context.AnnouncementDtos
