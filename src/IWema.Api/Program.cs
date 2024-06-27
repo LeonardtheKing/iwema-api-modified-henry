@@ -101,7 +101,6 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseMiddleware<CustomSecurityHeader>();
 app.UseRateLimiter();
 
 //var scope = app.Services.CreateScope();
@@ -115,5 +114,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+app.UseMiddleware<CustomSecurityHeader>();
 app.Run();
 

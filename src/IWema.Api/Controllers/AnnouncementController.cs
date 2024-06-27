@@ -1,7 +1,6 @@
 ﻿using IWema.Application.Announcements.Command.Add;
 using IWema.Application.Announcements.Command.Delete;
 using IWema.Application.Announcements.Command.PartialUpdate;
-using IWema.Application.Announcements.Query.GetAllAnnouncements;
 using IWema.Application.Announcements.Query.GetAnnouncementById;
 using IWema.Domain.Entity;
 using MediatR;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Reflection.PortableExecutable;
 
 namespace IWema.Application.Common.Utilities;
 
@@ -23,7 +24,6 @@ public class CustomSecurityHeader
         context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
 
         context.Response.Headers.Append("Referrer-Policy", "no-referrer");
-
 
         context.Response.Headers.Append("Content-Security-Policy",
             "default-src 'self'");
