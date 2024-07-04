@@ -1,11 +1,13 @@
 ﻿using IWema.Application.Common.DTO;
+using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Blog.Command.UpdateBlog;
 
 
-public class UpdateBlogCommandHandler(IBlogRepository blogRepository, IFileHandler fileHandler) : IRequestHandler<UpdateBlogCommand, ServiceResponse>
+public class UpdateBlogCommandHandler(IBlogRepository blogRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateBlogCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(UpdateBlogCommand command, CancellationToken cancellationToken)
     {
@@ -15,7 +17,7 @@ public class UpdateBlogCommandHandler(IBlogRepository blogRepository, IFileHandl
 
         if (command.File != null)
         {
-            var updatedImageLocation = await fileHandler.UpdateImage(command.File);
+            var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
             blog.UpdateImageLocation(updatedImageLocation);
         }
 

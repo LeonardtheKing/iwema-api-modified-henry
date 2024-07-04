@@ -6,7 +6,7 @@ namespace IWema.Application.Banners.Command.Delete;
 
 public record DeleteBannerCommand(Guid Id) : IRequest<ServiceResponse>;
 
-public class DeleteBannerCommandHandler(IBannerRepository bannerRepository, IFileHandler fileHandler) : IRequestHandler<DeleteBannerCommand, ServiceResponse>
+public class DeleteBannerCommandHandler(IBannerRepository bannerRepository) : IRequestHandler<DeleteBannerCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(DeleteBannerCommand command, CancellationToken cancellationToken)
     {

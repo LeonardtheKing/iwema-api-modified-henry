@@ -39,7 +39,7 @@ public class AnnouncementController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [AllowAnonymous]
+    [Authorize(Roles = Role.ADMIN)]
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {

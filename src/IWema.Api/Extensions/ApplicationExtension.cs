@@ -1,8 +1,4 @@
-﻿using IWema.Infrastructure.Persistence;
-using IWema.Infrastructure.Persistence.Seeding;
-using Microsoft.EntityFrameworkCore;
-
-namespace IWema.Api.Extensions;
+﻿namespace IWema.Api.Extensions;
 
 public static class ApplicationExtension
 {

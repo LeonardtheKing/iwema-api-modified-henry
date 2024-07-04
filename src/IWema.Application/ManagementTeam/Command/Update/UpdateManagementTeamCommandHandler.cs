@@ -16,7 +16,7 @@ namespace IWema.Application.ManagementTeam.Command.Update
         string Quote
     ) : IRequest<ServiceResponse>;
 
-    public class UpdateManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IFileHandler fileHandler) : IRequestHandler<UpdateManagementTeamCommand, ServiceResponse>
+    public class UpdateManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateManagementTeamCommand, ServiceResponse>
     {
         public async Task<ServiceResponse> Handle(UpdateManagementTeamCommand command, CancellationToken cancellationToken)
         {
@@ -28,7 +28,7 @@ namespace IWema.Application.ManagementTeam.Command.Update
             // Handle file update logic (if a file is provided)
             if (managementTeam == null) return new("Management Team Image Not Found", false);
             
-                var updatedImageLocation = await fileHandler.UpdateImage(command.File);
+                var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
               
             // Update management team member information
             managementTeam.SetNameOfExecutive(command.NameOfExecutive);

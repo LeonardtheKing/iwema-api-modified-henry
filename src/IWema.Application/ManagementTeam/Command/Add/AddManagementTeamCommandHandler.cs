@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Http;
 namespace IWema.Application.ManagementTeam.Command.Add;
 
 public record AddManagementTeamCommand(IFormFile File, string nameOfExecutive,string position,string quote,string profileLink) : IRequest<ServiceResponse>;
-public class AddManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IFileHandler fileHandler) : IRequestHandler<AddManagementTeamCommand, ServiceResponse>
+public class AddManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<AddManagementTeamCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(AddManagementTeamCommand command, CancellationToken cancellationToken)
     {
-        var response = await fileHandler.SaveFile(command.File);
+        var response = await FileHandler.SaveFileAsync(command.File,cancellationToken);
         if (response == null)
             return new("Image upload failed");
-        var imageUrl = await fileHandler.GetImageUrl(command.File);
+        var imageUrl = await FileHandler.GetImageUrlAsync(command.File,httpContextAccessor);
         if(imageUrl == null || string.IsNullOrEmpty(imageUrl))
             return new("Image upload failed"); 
 

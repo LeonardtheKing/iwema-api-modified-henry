@@ -52,7 +52,6 @@ public static class ServiceExtension
             .AddScoped<ISideMenuRepository, SideMenuRepository>()
             .AddScoped<ICachingAdapter, CachingAdapter>()
             .AddScoped<IBirthDayService, BirthdayService>()
-            .AddScoped<IFileHandler, FileHandler>()
             .AddScoped<IUpcomingEventsRepository, UpcomingEventsRepository>()
             .AddScoped<IAnniversaryService, AnniversaryService>()
             .AddScoped<IAnnouncementRepository, AnnouncementRepository>()
@@ -63,7 +62,6 @@ public static class ServiceExtension
             .AddScoped<IApplicationUserRepository, ApplicationUserRepository>()
             .AddScoped<IBlogRepository, BlogRepository>();
      
-
 
         services.AddHttpClient("iwema", client =>
         {

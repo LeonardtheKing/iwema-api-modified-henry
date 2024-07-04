@@ -1,4 +1,5 @@
 ﻿using IWema.Application.Common.DTO;
+using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
@@ -8,15 +9,15 @@ namespace IWema.Application.UpcomingEvents.Command.Add;
 
 public record AddUpcomingEventsCommand(IFormFile File, string NameOfEvent, string Date) : IRequest<ServiceResponse>;
 
-public class UpcomingEventsCommandHandler(IUpcomingEventsRepository announcementRepository, IFileHandler fileHandler) : IRequestHandler<AddUpcomingEventsCommand, ServiceResponse>
+public class UpcomingEventsCommandHandler(IUpcomingEventsRepository announcementRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<AddUpcomingEventsCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(AddUpcomingEventsCommand command, CancellationToken cancellationToken)
     {
 
-        var response = await fileHandler.SaveFile(command.File);
+        var response = await FileHandler.SaveFileAsync(command.File,cancellationToken);
         if (response == null)
             return new("Image upload failed");
-        var imageUrl = await fileHandler.GetImageUrl(command.File);
+        var imageUrl = await FileHandler.GetImageUrlAsync(command.File,httpContextAccessor);
         if (imageUrl == null || string.IsNullOrEmpty(imageUrl))
             return new("Image upload failed");
 

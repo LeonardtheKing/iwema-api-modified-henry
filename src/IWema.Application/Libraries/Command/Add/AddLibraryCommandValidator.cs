@@ -39,16 +39,6 @@ namespace IWema.Application.Libraries.Command.Add
             return true;
         }
 
-        //public static bool BeAValidMediaFile(IFormFile file)
-        //{
-        //    var fileExt = file.FileName.Split('.')[1].ToLower();
-        //    string[] allowedMediaExt = ["pdf", "doc", "docx", "xls", "xlsx", "txt", "ppt"];
-
-        //    if (allowedMediaExt.Contains(fileExt))
-        //        return true;
-
-        //    return false;
-        //}
 
         private bool BeAValidMediaFile(IFormFile file)
         {

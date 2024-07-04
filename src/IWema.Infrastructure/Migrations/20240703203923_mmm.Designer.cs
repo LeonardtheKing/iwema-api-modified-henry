@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWema.Infrastructure.Migrations
 {
     [DbContext(typeof(IWemaDbContext))]
-    [Migration("20240627120540_jjj")]
-    partial class jjj
+    [Migration("20240703203923_mmm")]
+    partial class mmm
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 ﻿using IWema.Application.Common.DTO;
+using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
@@ -14,8 +15,7 @@ public record UpdateAnnouncementCommand(
     string Content,
     string Link
 ) : IRequest<ServiceResponse>;
-public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,
-    IFileHandler fileHandler) : IRequestHandler<UpdateAnnouncementCommand, ServiceResponse>
+public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(UpdateAnnouncementCommand command, CancellationToken cancellationToken)
     {
@@ -27,7 +27,7 @@ public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announceme
         // Handle file update logic (if a file is provided)
         if (announcement == null) return new("Announcement Not Found", false);
 
-        var updatedImageLocation = await fileHandler.UpdateImage(command.File);
+        var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
 
         // Update management team member information
         announcement.Update(command.Title, command.Date, updatedImageLocation, command.Content, command.Link);

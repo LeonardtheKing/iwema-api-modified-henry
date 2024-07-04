@@ -56,7 +56,7 @@ public class RequestValidationBehaviour<TRequest, TResponse>(IEnumerable<IValida
         {
             var errorMessages = string.Join(" \n", failures.Select(v => v.ErrorMessage));
             logger.LogWarning("Validation failures for {RequestName}: {Failures}", typeof(TRequest).Name, errorMessages);
-            return (TResponse)Activator.CreateInstance(typeof(TResponse), errorMessages, false, null);
+           return (TResponse)Activator.CreateInstance(typeof(TResponse), errorMessages, false, null);
         }
 
         var result = await next();

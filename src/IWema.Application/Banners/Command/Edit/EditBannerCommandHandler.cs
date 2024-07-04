@@ -9,7 +9,7 @@ namespace IWema.Application.Banners.Command.Edit
 {
     public record EditBannerCommand(Guid Id, IFormFile File, string Title, bool IsActive) : IRequest<ServiceResponse>;
 
-    public class EditBannerCommandHandler(IBannerRepository bannerRepository,IFileHandler fileHandler) : IRequestHandler<EditBannerCommand, ServiceResponse>
+    public class EditBannerCommandHandler(IBannerRepository bannerRepository) : IRequestHandler<EditBannerCommand, ServiceResponse>
     {
         public async Task<ServiceResponse> Handle(EditBannerCommand command, CancellationToken cancellationToken)
         {
@@ -20,13 +20,13 @@ namespace IWema.Application.Banners.Command.Edit
                 return new("Banner record not found.", false);
             }
 
-            var deleteResponse = await fileHandler.DeleteFileAsync(banner.Name);
+            var deleteResponse = await FileHandler.DeleteFileAsync(banner.Name);
             if (!deleteResponse.Successful)
             {
                 return deleteResponse;
             }
 
-            var saveFileResponse = await fileHandler.SaveFile(command.File);
+            var saveFileResponse = await FileHandler.SaveFileAsync(command.File,cancellationToken);
             if (!saveFileResponse.Successful)
                 return saveFileResponse;
 

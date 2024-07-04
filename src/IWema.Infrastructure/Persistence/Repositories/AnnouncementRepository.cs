@@ -14,8 +14,13 @@ public class AnnouncementRepository(IWemaDbContext context) : IAnnouncementRepos
         return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<AnnouncementEntity> GetById(Guid id) =>
-     await context.Announcements.FindAsync(id);
+    public async Task<AnnouncementEntity> GetById(Guid id)
+    {
+        var announcement = await context.Announcements
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(a=>a.Id==id);
+        return announcement;
+    }
 
 
     public async Task<bool> DeleteAnnouncement(Guid announcementId)
@@ -32,16 +37,14 @@ public class AnnouncementRepository(IWemaDbContext context) : IAnnouncementRepos
         return rowsAffected > 0;
     }
 
+    public async Task<List<AnnouncementEntity>> Get()
+    {
+        var announcements = await context.Announcements
+                                     .AsNoTracking()
+                                     .ToListAsync();
+        return announcements;
+    }
 
-    //public async Task<bool> Delete(Guid id)
-    //{
-    //    var entity = await GetSingleAnnouncement(id);
-    //    context.Remove(entity);
-    //    return await context.SaveChangesAsync() > 0;
-    //}
-
-    public async Task<List<AnnouncementEntity>> Get() =>
-        await context.Announcements.ToListAsync();
 
     public async Task<GetAnnouncementByIdOutputModel> GetSingleAnnouncement(Guid announcementId)
     {

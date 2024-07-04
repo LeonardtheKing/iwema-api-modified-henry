@@ -15,7 +15,7 @@ public class UpdateAnnouncementCommandValidator: AbstractValidator<UpdateAnnounc
 
         RuleFor(command => command.Title)
             .NotEmpty().WithMessage("Title is required.")
-            .MaximumLength(100).WithMessage("Title cannot exceed 100 characters.");
+            .MaximumLength(50).WithMessage("Title cannot exceed 100 characters.");
 
         RuleFor(command => command.Date)
             .NotEmpty().WithMessage("Date is required.")

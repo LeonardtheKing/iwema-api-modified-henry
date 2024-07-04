@@ -6,27 +6,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IWema.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class jjj : Migration
+    public partial class nnnn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "AnnouncementDtos",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnnouncementDtos", x => x.Id);
-                });
-
+        
             migrationBuilder.CreateTable(
                 name: "Announcements",
                 columns: table => new

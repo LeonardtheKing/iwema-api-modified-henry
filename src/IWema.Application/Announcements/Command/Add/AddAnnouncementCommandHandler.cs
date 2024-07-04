@@ -1,4 +1,5 @@
 ﻿using IWema.Application.Common.DTO;
+using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
@@ -7,17 +8,17 @@ using Microsoft.AspNetCore.Http;
 namespace IWema.Application.Announcements.Command.Add;
 
 public record AddAnnouncementCommand(IFormFile File, string Title, string Date, string Content, string? Link) : IRequest<ServiceResponse>;
-public class AddAnnouncementCommandHandler(IAnnouncementRepository announcementRepository, IFileHandler fileHandler) : IRequestHandler<AddAnnouncementCommand, ServiceResponse>
+public class AddAnnouncementCommandHandler(IAnnouncementRepository announcementRepository, IHttpContextAccessor httpContextAccessor) : IRequestHandler<AddAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(AddAnnouncementCommand command, CancellationToken cancellationToken)
     {
-        var saveFile = await fileHandler.SaveFile(command.File);
+        var saveFile = await FileHandler.SaveFileAsync(command.File,cancellationToken);
         if (saveFile == null)
-            return new ServiceResponse("Image upload failed");
+            return new ("Image upload failed");
 
-        var imageUrl = await fileHandler.GetImageUrl(command.File);
+        var imageUrl = await FileHandler.GetImageUrlAsync(command.File,httpContextAccessor);
         if (imageUrl == null)
-            return new ServiceResponse("Image upload failed");
+            return new("Image upload failed");
 
 
         AnnouncementEntity announcement;
@@ -32,6 +33,6 @@ public class AddAnnouncementCommandHandler(IAnnouncementRepository announcementR
 
         var added = await announcementRepository.Add(announcement);
 
-        return new ServiceResponse(added ? "Created" : "Announcement upload failed.", added);
+        return new(added ? "Created" : "Announcement upload failed.", added);
     }
 }

@@ -8,7 +8,7 @@ namespace IWema.Application.Banners.Query.GetFileById;
 
 public record GetBannerFileByIdQuery(Guid Id) : IRequest<ServiceResponse<GetBannerFileByIdQueryOutputModel>>;
 
-public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository, IFileHandler fileHandler) : IRequestHandler<GetBannerFileByIdQuery, ServiceResponse<GetBannerFileByIdQueryOutputModel>>
+public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository) : IRequestHandler<GetBannerFileByIdQuery, ServiceResponse<GetBannerFileByIdQueryOutputModel>>
 {
     public async Task<ServiceResponse<GetBannerFileByIdQueryOutputModel>> Handle(GetBannerFileByIdQuery request, CancellationToken cancellationToken)
     {
@@ -19,7 +19,7 @@ public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository, I
 
         var outputStream = new MemoryStream();
 
-        var fileExistResponse = await fileHandler.ReadFile(banner.Name, outputStream);
+        var fileExistResponse = await FileHandler.ReadFileAsync(banner.Name, outputStream);
 
         if (!fileExistResponse.Successful)
             return new("File not found.");

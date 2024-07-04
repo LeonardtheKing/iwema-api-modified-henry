@@ -8,5 +8,4 @@ public record UpdateUpcomingEventInputModel
      IFormFile File ,
      string NameOfEvent,
      string Date
-
 );

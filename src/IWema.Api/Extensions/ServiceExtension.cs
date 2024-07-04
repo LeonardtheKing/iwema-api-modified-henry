@@ -25,5 +25,7 @@ public static class ServiceExtension
             .Configure<GeneralConfigOptions>(configuration.GetSection(nameof(GeneralConfigOptions)));
         services
            .Configure<SeamlessHRConfigOptions>(configuration.GetSection(nameof(SeamlessHRConfigOptions)));
+        services
+           .Configure<SecurityOptions>(configuration.GetSection(nameof(SecurityOptions)));
     }
 }

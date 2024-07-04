@@ -29,10 +29,4 @@
     <ProjectReference Include="..\IWema.Application\IWema.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Persistence\Seeding\MenuBar.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

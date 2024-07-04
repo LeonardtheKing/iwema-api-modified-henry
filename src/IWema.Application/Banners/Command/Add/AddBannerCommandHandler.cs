@@ -10,11 +10,11 @@ namespace IWema.Application.Banners.Command.Add;
 
 public record AddBannerCommand(IFormFile File, string Title, bool IsActive) : IRequest<ServiceResponse>;
 
-public class AddBannerCommandHandler(IBannerRepository bannerRepository,IFileHandler fileHandler) : IRequestHandler<AddBannerCommand, ServiceResponse>
+public class AddBannerCommandHandler(IBannerRepository bannerRepository) : IRequestHandler<AddBannerCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(AddBannerCommand command, CancellationToken cancellationToken)
     {
-        var saveFileResponse = await fileHandler.SaveFile(command.File);
+        var saveFileResponse = await FileHandler.SaveFileAsync(command.File,cancellationToken);
 
         if (!saveFileResponse.Successful)
             return saveFileResponse;

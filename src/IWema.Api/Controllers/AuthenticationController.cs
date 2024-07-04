@@ -60,6 +60,7 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
+        [AllowAnonymous]
         [HttpDelete]
         [Route("logout")]
         public async Task<IActionResult> LogoutUser([FromBody] string token)

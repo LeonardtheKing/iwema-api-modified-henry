@@ -9,11 +9,11 @@ namespace IWema.Application.Libraries.Command.Add
 {
     public record AddLibraryCommand(IFormFile File, string Description, string Type) : IRequest<ServiceResponse>;
 
-    public class AddLibraryCommandHandler(ILibraryRepository libraryRepository,IFileHandler fileHandler) : IRequestHandler<AddLibraryCommand, ServiceResponse>
+    public class AddLibraryCommandHandler(ILibraryRepository libraryRepository) : IRequestHandler<AddLibraryCommand, ServiceResponse>
     {
         public async Task<ServiceResponse> Handle(AddLibraryCommand command, CancellationToken cancellationToken)
         {
-            var saveFileResponse = await fileHandler.SaveFile(command.File);
+            var saveFileResponse = await FileHandler.SaveFileAsync(command.File,cancellationToken);
 
             if (!saveFileResponse.Successful)
                 return new("The File Upload was Unsuccessful");

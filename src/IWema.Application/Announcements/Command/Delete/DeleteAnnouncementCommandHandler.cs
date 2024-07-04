@@ -5,7 +5,7 @@ using MediatR;
 namespace IWema.Application.Announcements.Command.Delete;
 
 public record DeleteAnnouncementCommand(Guid Id) : IRequest<ServiceResponse>;
-public class DeleteAnnouncementCommandHandler(IAnnouncementRepository announcementRepository, IFileHandler fileHandler) : IRequestHandler<DeleteAnnouncementCommand, ServiceResponse>
+public class DeleteAnnouncementCommandHandler(IAnnouncementRepository announcementRepository) : IRequestHandler<DeleteAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(DeleteAnnouncementCommand request, CancellationToken cancellationToken)
     {

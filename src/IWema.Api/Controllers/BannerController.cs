@@ -6,7 +6,6 @@ using IWema.Application.Banners.Query.GetById;
 using IWema.Application.Banners.Query.GetFileById;
 using IWema.Domain.Entity;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
