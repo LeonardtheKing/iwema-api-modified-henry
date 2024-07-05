@@ -1,6 +1,5 @@
 ﻿using IWema.Application.Birthday.Query.GetBirthdays;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +7,7 @@ namespace IWema.Api.Controllers;
 
 public class BirthdayController(IMediator mediator) : BaseController
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Get()
     {

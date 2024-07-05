@@ -39,8 +39,7 @@ public class RequestValidationBehaviour<TRequest, TResponse>(IEnumerable<IValida
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Handling {RequestName} with content: {@Request}", typeof(TRequest).Name, request);
-
+ 
         if (!validators.Any())
         {
             var response = await next();
@@ -60,7 +59,6 @@ public class RequestValidationBehaviour<TRequest, TResponse>(IEnumerable<IValida
         }
 
         var result = await next();
-        logger.LogInformation("Handled {RequestName}", typeof(TRequest).Name);
         return result;
     }
 }

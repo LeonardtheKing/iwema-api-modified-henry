@@ -5,7 +5,6 @@ using IWema.Application.ManagementTeam.Query.GetAll;
 using IWema.Application.ManagementTeam.Query.GetById;
 using IWema.Domain.Entity;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

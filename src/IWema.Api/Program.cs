@@ -24,6 +24,9 @@ builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.AddIdentityAuthenticationServices();
 builder.Services.AddCors();
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 builder.Services
     .AddAuthentication(options =>
     {
@@ -46,8 +49,6 @@ builder.Services
     });
 
 
-builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
 var app = builder.Build();
 
 app.UseCors(options =>
@@ -56,7 +57,7 @@ app.UseCors(options =>
     options.AllowAnyMethod(); // Allow all HTTP methods
     options.AllowAnyHeader(); // Allow all headers
 });
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+//app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.RemoveSensitiveHeaders();
 app.SerilogConfiguration();
 

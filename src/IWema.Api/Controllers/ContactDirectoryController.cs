@@ -1,9 +1,12 @@
 ﻿using IWema.Application.ContactDirectory.Query.GetContactDirectory;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IWema.Api.Controllers
 {
+    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class ContactDirectoryController(IMediator mediator) : BaseController

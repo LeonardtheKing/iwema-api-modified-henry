@@ -1,11 +1,10 @@
-﻿using IWema.Application.Common.Utilities;
+﻿using IWema.Application.Common.Configuration;
 using IWema.Application.Contract;
 using IWema.Application.Contract.SeamlessHR;
 using IWema.Domain.Entity;
 using IWema.Infrastructure.Adapters;
 using IWema.Infrastructure.Adapters.ActiveDirectory;
 using IWema.Infrastructure.Adapters.ActiveDirectory.Services;
-using IWema.Infrastructure.Adapters.JWT;
 using IWema.Infrastructure.Adapters.SeamlessHR.Services;
 using IWema.Infrastructure.Caching;
 using IWema.Infrastructure.Persistence;

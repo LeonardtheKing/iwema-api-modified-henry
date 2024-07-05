@@ -4,17 +4,13 @@ using IWema.Application.News.Command.Update;
 using IWema.Application.News.Query.GetAll;
 using IWema.Application.News.Query.GetById;
 using IWema.Application.News.Query.GetScroll;
-using IWema.Domain.Entity;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IWema.Api.Controllers;
 
 public class NewsController(IMediator mediator) : BaseController
 {
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet("scroll")]
     public async Task<IActionResult> GetNewsScroll()
     {
@@ -22,7 +18,6 @@ public class NewsController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -30,7 +25,6 @@ public class NewsController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
@@ -38,7 +32,6 @@ public class NewsController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPost]
     public async Task<IActionResult> Add(AddNewsInputModel request)
     {
@@ -47,7 +40,6 @@ public class NewsController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -56,7 +48,6 @@ public class NewsController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPut]
     public async Task<IActionResult> Put(UpdateNewsInputModel request)
     {

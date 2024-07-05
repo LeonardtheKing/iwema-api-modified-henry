@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using IWema.Application.Common.Configuration;
+using Serilog;
 using Serilog.Events;
 using Serilog.Formatting;
 using Serilog.Formatting.Compact;
@@ -13,7 +14,7 @@ namespace IWema.Api.Extensions
             var configuration = app.Configuration;
 
             var serilogOptions = configuration.GetSection(nameof(SerilogOptions)).Get<SerilogOptions>()!;
-            var serilogConfigurations = configuration.GetSection(nameof(Serilog)).Get<Serilog>()!;
+            var serilogConfigurations = configuration.GetSection(nameof(SERILOG)).Get<SERILOG>()!;
 
             var loggerConfiguration = new LoggerConfiguration()
                 .MinimumLevel.Is(GetLogEventLevel(serilogConfigurations.MinimumLevel.Default));

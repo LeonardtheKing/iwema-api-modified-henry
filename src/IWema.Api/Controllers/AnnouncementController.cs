@@ -2,7 +2,6 @@
 using IWema.Application.Announcements.Command.Delete;
 using IWema.Application.Announcements.Command.PartialUpdate;
 using IWema.Application.Announcements.Query.GetAnnouncementById;
-using IWema.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,10 @@ namespace IWema.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class AnnouncementController(IMediator mediator) : BaseController
 {
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AddAnnouncementInputModel request)
     {
@@ -23,7 +22,6 @@ public class AnnouncementController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -31,7 +29,6 @@ public class AnnouncementController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -39,7 +36,7 @@ public class AnnouncementController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
@@ -47,7 +44,6 @@ public class AnnouncementController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAnnouncement(Guid id,
         [FromForm] PartiallyUpdateAnnouncementInputModel request)

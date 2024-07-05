@@ -1,4 +1,4 @@
-﻿namespace IWema.Domain.Entity;
+﻿namespace IWema.Application.Common.DTO;
 
 public class AnnouncementDto
 {

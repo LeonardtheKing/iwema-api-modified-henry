@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IWema.Api.Controllers;
 
+[Authorize]
 public class MenuBarController(IMediator mediator) : BaseController
 {
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -22,7 +22,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
@@ -30,7 +29,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet("favorite")]
     public async Task<IActionResult> GetFavorite()
     {
@@ -38,7 +36,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPost]
     public async Task<IActionResult> Add(AddMenuBarInputModel request)
     {
@@ -48,7 +45,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
     
-   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, UpdateMenuBarInputModel request)
     {
@@ -58,7 +54,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(updateResult);
     }
 
-   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPut("hit/{id}")]
     public async Task<IActionResult> UpdateHit(Guid id)
     {
@@ -66,7 +61,6 @@ public class MenuBarController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {

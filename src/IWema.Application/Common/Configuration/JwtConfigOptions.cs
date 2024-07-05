@@ -1,4 +1,4 @@
-﻿namespace IWema.Infrastructure.Adapters.JWT;
+﻿namespace IWema.Application.Common.Configuration;
 
 public class JwtConfigOptions
 {

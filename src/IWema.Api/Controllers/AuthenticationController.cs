@@ -1,17 +1,14 @@
-﻿using IWema.Application.Login.AdminLogin.Command;
+﻿using IWema.Application.AdminLogin.Command;
 using IWema.Application.Login.Command;
 using IWema.Application.Logout;
 using IWema.Infrastructure.Adapters.ActiveDirectory;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
 
 namespace IWema.Api.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController(IMediator mediator,IOptions<ActiveDirectoryConfigOptions> options) : BaseController

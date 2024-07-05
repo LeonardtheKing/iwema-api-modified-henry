@@ -2,7 +2,6 @@
 using IWema.Application.Contract;
 using IWema.Application.Contract.Login;
 using IWema.Application.Contract.Roles;
-using IWema.Application.Login.Command;
 using IWema.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -31,12 +30,6 @@ namespace IWema.Application.Login.Command
                 {
                     return new ServiceResponse<LoginResponse>("You have been locked out. Please try again later.");
                 }
-            }
-
-            bool emailExists = activeDirectoryService.DoesEmailExist(email);
-            if (!emailExists)
-            {
-                return new ServiceResponse<LoginResponse>("Email is incorrect.");
             }
 
             bool isAuthenticated = false;

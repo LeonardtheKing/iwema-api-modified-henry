@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IWema.Api.Controllers;
 
+[Authorize]
 public class BannerController(IMediator mediator) : BaseController
 {
-    [Authorize(Roles =Role.ADMIN)]
     [HttpPost]
     public async Task<IActionResult> Add(AddBannerInputModel request)
     {
@@ -22,7 +22,7 @@ public class BannerController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
+  
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -31,14 +31,13 @@ public class BannerController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
         var response = await mediator.Send(new GetAllBannerQuery());
         return ServiceResponse(response);
     }
-    [Authorize(Roles = Role.ADMIN)]
+
     [HttpGet("file/{id}")]
     public async Task<IActionResult> GetMedia(Guid id)
     {
@@ -57,7 +56,7 @@ public class BannerController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
+ 
     [HttpPost("edit")]
     public async Task<IActionResult> EditBanner(EditBannerInputModel model)
     {

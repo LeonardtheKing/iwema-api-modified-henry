@@ -18,9 +18,9 @@ namespace IWema.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] 
     public class SideMenuController(IMediator mediator) : BaseController
     {
-        [Authorize(Roles = Role.ADMIN)]
         [HttpPost("parentSideMenu")]
         public async Task<IActionResult> Add(AddParentSideMenuInputModel request)
         {
@@ -29,7 +29,6 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpPost("childSideMenu")]
         public async Task<IActionResult> AddChildSideMenu(AddChildSideMenuInputModel request)
         {
@@ -38,7 +37,6 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpGet("parentSideMenu")]
         public async Task<IActionResult> GetParentSideMenu(Guid ParentSideMenuId)
         {
@@ -46,7 +44,6 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpDelete("parentMenu/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -63,7 +60,6 @@ namespace IWema.Api.Controllers
         }
 
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpPut("parentSideMenu/{id}")]
         public async Task<IActionResult> Update(Guid id, UpdateParentSideMenuInputModel request)
         {
@@ -73,7 +69,6 @@ namespace IWema.Api.Controllers
             return ServiceResponse(updateResult);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpPut("childSideMenu/{id}")]
         public async Task<IActionResult> UpdateChildSideMenu(Guid id, UpdateChildSideMenuInputModel request)
         {
@@ -83,8 +78,7 @@ namespace IWema.Api.Controllers
             return ServiceResponse(updateResult);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+       
         [HttpGet("allParentSideMenu")]
         public async Task<IActionResult> GetAllParentSideMenu()
         {
@@ -92,8 +86,7 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    
         [HttpGet("allChildSideMenu")]
         public async Task<IActionResult> GetAllChildMenu()
         {
@@ -101,7 +94,6 @@ namespace IWema.Api.Controllers
             return ServiceResponse(response);
         }
 
-        [Authorize(Roles = Role.ADMIN)]
         [HttpGet("parentswithchildren")]
         public async Task<IActionResult> GetAllParentsWithChildren()
         {

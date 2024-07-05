@@ -1,6 +1,6 @@
-﻿using IWema.Application.Contract;
+﻿using IWema.Application.Common.Configuration;
+using IWema.Application.Contract;
 using IWema.Domain.Entity;
-using IWema.Infrastructure.Adapters.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

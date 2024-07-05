@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 
-namespace IWema.Application.Login.AdminLogin.Command
+namespace IWema.Application.AdminLogin.Command
 {
     public record AdminLoginCommand(string Email, string Password) : IRequest<ServiceResponse<LoginResponse>>;
 
@@ -34,11 +34,12 @@ namespace IWema.Application.Login.AdminLogin.Command
                 }
             }
 
-            bool emailExists = activeDirectoryService.DoesEmailExist(email);
-            if (!emailExists)
-            {
-                return new ServiceResponse<LoginResponse>("Email is incorrect.");
-            }
+            //bool emailExists = activeDirectoryService.DoesEmailExist(email);
+            //if (!emailExists)
+            //{
+                
+            //    return new ServiceResponse<LoginResponse>("Email is incorrect.");
+            //}
 
             bool isAuthenticated = false;
 

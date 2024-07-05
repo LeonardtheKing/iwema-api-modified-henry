@@ -3,17 +3,16 @@ using IWema.Application.Libraries.Command.Delete;
 using IWema.Application.Libraries.Query.GetAll;
 using IWema.Application.Libraries.Query.GetById;
 using IWema.Application.Libraries.Query.GetFilebyId;
-using IWema.Domain.Entity;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IWema.Api.Controllers;
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
+[Authorize]
 public class LibraryController(IMediator mediator) : BaseController
 {
-    [Authorize(Roles = Role.ADMIN)]
+   
     [HttpPost]
     public async Task<IActionResult> Add(AddLibraryInputModel request)
     {
@@ -22,7 +21,6 @@ public class LibraryController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {

@@ -1,4 +1,4 @@
-﻿namespace IWema.Application.Login.AdminLogin.Command;
+﻿namespace IWema.Application.AdminLogin.Command;
 
 public class AdminLoginInput
 {

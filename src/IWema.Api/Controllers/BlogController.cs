@@ -11,12 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace IWema.Api.Controllers;
 
 [Route("api/[controller]")]
-
-
+[Authorize]
 public class BlogController(IMediator mediator) : BaseController
 {
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AddBlogInputModel request)
     {
@@ -25,7 +23,6 @@ public class BlogController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -33,7 +30,6 @@ public class BlogController(IMediator mediator) : BaseController
         return ServiceResponse(response);
     }
 
-    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -42,14 +38,12 @@ public class BlogController(IMediator mediator) : BaseController
     }
 
     [HttpGet]
-    [AllowAnonymous]
     public async Task<IActionResult> Get()
     {
         var response = await mediator.Send(new GetAllBlogsQuery());
         return ServiceResponse(response);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromForm] UpdateBlogInputModel request)
     {
