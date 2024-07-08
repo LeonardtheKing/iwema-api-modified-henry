@@ -2,13 +2,14 @@
 using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using MimeMapping;
 
 namespace IWema.Application.Banners.Query.GetFileById;
 
 public record GetBannerFileByIdQuery(Guid Id) : IRequest<ServiceResponse<GetBannerFileByIdQueryOutputModel>>;
 
-public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository) : IRequestHandler<GetBannerFileByIdQuery, ServiceResponse<GetBannerFileByIdQueryOutputModel>>
+public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository, IWebHostEnvironment env) : IRequestHandler<GetBannerFileByIdQuery, ServiceResponse<GetBannerFileByIdQueryOutputModel>>
 {
     public async Task<ServiceResponse<GetBannerFileByIdQueryOutputModel>> Handle(GetBannerFileByIdQuery request, CancellationToken cancellationToken)
     {
@@ -19,7 +20,7 @@ public class GetBannerFileByIdQueryHandler(IBannerRepository bannerRepository) :
 
         var outputStream = new MemoryStream();
 
-        var fileExistResponse = await FileHandler.ReadFileAsync(banner.Name, outputStream);
+        var fileExistResponse = await FileHandler.ReadFileAsync(banner.Name, outputStream,env);
 
         if (!fileExistResponse.Successful)
             return new("File not found.");

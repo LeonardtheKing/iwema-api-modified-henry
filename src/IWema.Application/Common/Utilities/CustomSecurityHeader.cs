@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Reflection.PortableExecutable;
 
 namespace IWema.Application.Common.Utilities;
 

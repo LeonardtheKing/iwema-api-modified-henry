@@ -1,5 +1,4 @@
 ﻿using IWema.Application.Common.DTO;
-using IWema.Application.Contract;
 using IWema.Application.Contract.SeamlessHR;
 using IWema.Application.Contract.SeamlessHR.DTO;
 using MediatR;

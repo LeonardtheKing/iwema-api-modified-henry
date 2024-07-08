@@ -3,13 +3,14 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Banners.Command.Edit
 {
     public record EditBannerCommand(Guid Id, IFormFile File, string Title, bool IsActive) : IRequest<ServiceResponse>;
 
-    public class EditBannerCommandHandler(IBannerRepository bannerRepository) : IRequestHandler<EditBannerCommand, ServiceResponse>
+    public class EditBannerCommandHandler(IBannerRepository bannerRepository, IWebHostEnvironment env) : IRequestHandler<EditBannerCommand, ServiceResponse>
     {
         public async Task<ServiceResponse> Handle(EditBannerCommand command, CancellationToken cancellationToken)
         {
@@ -20,17 +21,17 @@ namespace IWema.Application.Banners.Command.Edit
                 return new("Banner record not found.", false);
             }
 
-            var deleteResponse = await FileHandler.DeleteFileAsync(banner.Name);
+            var deleteResponse = await FileHandler.DeleteFileAsync(banner.Name,env);
             if (!deleteResponse.Successful)
             {
                 return deleteResponse;
             }
 
-            var saveFileResponse = await FileHandler.SaveFileAsync(command.File,cancellationToken);
-            if (!saveFileResponse.Successful)
-                return saveFileResponse;
+            var saveFileResponse = await FileHandler.SaveFileAsync(command.File,env,cancellationToken);
+            if (saveFileResponse == null || string.IsNullOrEmpty(saveFileResponse))
+                return new("Unable  to save banner");
 
-            banner.Update(saveFileResponse.Response, command.Title, command.IsActive);
+            banner.Update(saveFileResponse, command.Title, command.IsActive);
 
             var updated = await bannerRepository.Update(banner);
 

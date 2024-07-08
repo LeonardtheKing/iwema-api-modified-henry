@@ -3,13 +3,14 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Libraries.Command.Delete;
 
 public record DeleteLibraryCommand(Guid Id) : IRequest<ServiceResponse>;
 
-public class DeleteLibraryCommandHandler(ILibraryRepository libraryRepository) : IRequestHandler<DeleteLibraryCommand, ServiceResponse>
+public class DeleteLibraryCommandHandler(ILibraryRepository libraryRepository, IWebHostEnvironment env) : IRequestHandler<DeleteLibraryCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(DeleteLibraryCommand command, CancellationToken cancellationToken)
     {
@@ -20,7 +21,7 @@ public class DeleteLibraryCommandHandler(ILibraryRepository libraryRepository) :
             return new("Library record not found.", false);
         }
 
-        var deleteResponse = await FileHandler.DeleteFileAsync(banner.Name);
+        var deleteResponse = await FileHandler.DeleteFileAsync(banner.Name,env);
         if (!deleteResponse.Successful)
         {
             return deleteResponse;

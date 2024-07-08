@@ -8,5 +8,6 @@ public interface IJwtTokenManager
     Task<string> GenerateRefreshToken();
     void RevokeToken(string token);
     bool IsTokenRevoked(string token);
+    ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 
 }

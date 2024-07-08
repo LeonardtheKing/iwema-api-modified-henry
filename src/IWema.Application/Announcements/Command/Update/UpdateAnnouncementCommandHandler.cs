@@ -3,6 +3,7 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Announcements.Command.Update;
@@ -15,7 +16,7 @@ public record UpdateAnnouncementCommand(
     string Content,
     string Link
 ) : IRequest<ServiceResponse>;
-public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateAnnouncementCommand, ServiceResponse>
+public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<UpdateAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(UpdateAnnouncementCommand command, CancellationToken cancellationToken)
     {
@@ -27,7 +28,7 @@ public class UpdateAnnouncementCommandHandler(IAnnouncementRepository announceme
         // Handle file update logic (if a file is provided)
         if (announcement == null) return new("Announcement Not Found", false);
 
-        var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
+        var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor,env);
 
         // Update management team member information
         announcement.Update(command.Title, command.Date, updatedImageLocation, command.Content, command.Link);

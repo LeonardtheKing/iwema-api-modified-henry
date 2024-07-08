@@ -33,4 +33,10 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images\4441e2e1-0f30-401c-bc15-7e62584f2223_Architecture.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

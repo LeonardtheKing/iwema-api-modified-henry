@@ -5,8 +5,7 @@ using Serilog.Formatting;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.MSSqlServer;
 
-namespace IWema.Api.Extensions
-{
+
     public static class SerilogExtension
     {
         public static void SerilogConfiguration(this WebApplication app)
@@ -138,4 +137,4 @@ namespace IWema.Api.Extensions
             };
         }
     }
-}
+

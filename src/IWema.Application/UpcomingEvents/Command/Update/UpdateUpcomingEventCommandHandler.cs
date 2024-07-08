@@ -3,12 +3,13 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.UpcomingEvents.Command.Update;
 
 public record UpdateUpcomingEventsCommand(Guid Id, string NameOfEvent, string Date, IFormFile File) : IRequest<ServiceResponse>;
-public class UpdateUpcomingEventCommandHandler(IUpcomingEventsRepository upcomingEventsRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateUpcomingEventsCommand, ServiceResponse>
+public class UpdateUpcomingEventCommandHandler(IUpcomingEventsRepository upcomingEventsRepository,IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<UpdateUpcomingEventsCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(UpdateUpcomingEventsCommand command, CancellationToken cancellationToken)
     {
@@ -18,7 +19,7 @@ public class UpdateUpcomingEventCommandHandler(IUpcomingEventsRepository upcomin
             return new("UpcomingEvent not found.", false);
 
         var updatedImageLocation
-            = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
+            = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor,env);
         if (updatedImageLocation == null || string.IsNullOrEmpty(updatedImageLocation)) return new("file not found");
 
         // Update Upcoming Event information

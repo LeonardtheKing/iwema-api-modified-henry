@@ -3,20 +3,21 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Announcements.Command.Add;
 
 public record AddAnnouncementCommand(IFormFile File, string Title, string Date, string Content, string? Link) : IRequest<ServiceResponse>;
-public class AddAnnouncementCommandHandler(IAnnouncementRepository announcementRepository, IHttpContextAccessor httpContextAccessor) : IRequestHandler<AddAnnouncementCommand, ServiceResponse>
+public class AddAnnouncementCommandHandler(IAnnouncementRepository announcementRepository, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<AddAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(AddAnnouncementCommand command, CancellationToken cancellationToken)
     {
-        var saveFile = await FileHandler.SaveFileAsync(command.File,cancellationToken);
+        var saveFile = await FileHandler.SaveFileAsync(command.File,env,cancellationToken);
         if (saveFile == null)
             return new ("Image upload failed");
 
-        var imageUrl = await FileHandler.GetImageUrlAsync(command.File,httpContextAccessor);
+        var imageUrl = await FileHandler.GetImageUrlAsync(command.File,httpContextAccessor,env);
         if (imageUrl == null)
             return new("Image upload failed");
 

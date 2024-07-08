@@ -2,12 +2,13 @@
 using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.UpcomingEvents.Command.PartialUpdate;
 
 
-public class PartiallyUpdateUpcomingEventsCommandHandler(IUpcomingEventsRepository upcomingEventsRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<PartiallyUpdateUpcomingEventsCommand, ServiceResponse>
+public class PartiallyUpdateUpcomingEventsCommandHandler(IUpcomingEventsRepository upcomingEventsRepository,IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<PartiallyUpdateUpcomingEventsCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(PartiallyUpdateUpcomingEventsCommand command, CancellationToken cancellationToken)
     {
@@ -17,7 +18,7 @@ public class PartiallyUpdateUpcomingEventsCommandHandler(IUpcomingEventsReposito
 
         if (command.File != null)
         {
-            var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
+            var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor,env);
             upcomingEvent.UpdateImageLocation(updatedImageLocation);
         }
 

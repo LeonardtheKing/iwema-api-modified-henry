@@ -4,6 +4,7 @@ using IWema.Infrastructure;
 using IWema.Infrastructure.Adapters.SeamlessHR;
 using IWema.Infrastructure.Persistence.Seeding;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;
@@ -63,6 +64,7 @@ app.SerilogConfiguration();
 
 app.ConfigureApplication();
 app.UseStaticFiles();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -76,6 +78,7 @@ app.UseRateLimiter();
 
 // Call the SeedData method
 await Seeder.SeedData(app.Services);
+app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

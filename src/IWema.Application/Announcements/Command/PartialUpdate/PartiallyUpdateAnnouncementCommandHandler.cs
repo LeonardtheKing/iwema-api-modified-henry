@@ -2,12 +2,13 @@
 using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.Announcements.Command.PartialUpdate;
 
 
-public class PartiallyUpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<PartiallyUpdateAnnouncementCommand, ServiceResponse>
+public class PartiallyUpdateAnnouncementCommandHandler(IAnnouncementRepository announcementRepository,IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<PartiallyUpdateAnnouncementCommand, ServiceResponse>
 {
     public async Task<ServiceResponse> Handle(PartiallyUpdateAnnouncementCommand command, CancellationToken cancellationToken)
     {
@@ -17,7 +18,7 @@ public class PartiallyUpdateAnnouncementCommandHandler(IAnnouncementRepository a
 
         if (command.File != null)
         {
-            var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
+            var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor,env);
             announcement.UpdateImageLocation(updatedImageLocation);
         }
 

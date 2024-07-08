@@ -3,13 +3,14 @@ using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using IWema.Application.Libraries.Query.GetFileById;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using MimeMapping;
 
 namespace IWema.Application.Libraries.Query.GetFilebyId
 {
     public record GetLibraryFileByIdQuery(Guid Id) : IRequest<ServiceResponse<GetLibraryFileByIdQueryOutputModel>>;
 
-    public class GetLibraryFileByIdQueryHandler(ILibraryRepository libraryRepository) : IRequestHandler<GetLibraryFileByIdQuery, ServiceResponse<GetLibraryFileByIdQueryOutputModel>>
+    public class GetLibraryFileByIdQueryHandler(ILibraryRepository libraryRepository, IWebHostEnvironment env) : IRequestHandler<GetLibraryFileByIdQuery, ServiceResponse<GetLibraryFileByIdQueryOutputModel>>
     {
         public async Task<ServiceResponse<GetLibraryFileByIdQueryOutputModel>> Handle(GetLibraryFileByIdQuery request, CancellationToken cancellationToken)
         {
@@ -20,7 +21,7 @@ namespace IWema.Application.Libraries.Query.GetFilebyId
 
             var outputStream = new MemoryStream();
 
-            var fileExistResponse = await FileHandler.ReadFileAsync(library.Name, outputStream);
+            var fileExistResponse = await FileHandler.ReadFileAsync(library.Name, outputStream,env);
 
             if (!fileExistResponse.Successful)
                 return new("File not found.");

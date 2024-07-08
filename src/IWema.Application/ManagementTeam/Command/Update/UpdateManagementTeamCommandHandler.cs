@@ -2,6 +2,7 @@
 using IWema.Application.Common.Utilities;
 using IWema.Application.Contract;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace IWema.Application.ManagementTeam.Command.Update
@@ -16,7 +17,7 @@ namespace IWema.Application.ManagementTeam.Command.Update
         string Quote
     ) : IRequest<ServiceResponse>;
 
-    public class UpdateManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateManagementTeamCommand, ServiceResponse>
+    public class UpdateManagementTeamCommandHandler(IManagementTeamRepository managementTeamRepository,IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IRequestHandler<UpdateManagementTeamCommand, ServiceResponse>
     {
         public async Task<ServiceResponse> Handle(UpdateManagementTeamCommand command, CancellationToken cancellationToken)
         {
@@ -28,7 +29,7 @@ namespace IWema.Application.ManagementTeam.Command.Update
             // Handle file update logic (if a file is provided)
             if (managementTeam == null) return new("Management Team Image Not Found", false);
             
-                var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor);
+                var updatedImageLocation = await FileHandler.UpdateImageAsync(command.File,httpContextAccessor,env);
               
             // Update management team member information
             managementTeam.SetNameOfExecutive(command.NameOfExecutive);
