@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using IWema.Application.Common.DTO;
+﻿using IWema.Application.Common.DTO;
 using IWema.Application.Contract;
-using IWema.Application.MenuBars.Query.GetAll;
-using IWema.Domain.Entity;
 using MediatR;
 
 namespace IWema.Application.ManagementTeam.Query.GetAll;

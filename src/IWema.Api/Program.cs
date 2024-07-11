@@ -54,7 +54,8 @@ var app = builder.Build();
 
 app.UseCors(options =>
 {
-    options.AllowAnyOrigin(); // Allow requests from any origin
+    //options.AllowAnyOrigin(); // Allow requests from any origin
+    options.WithOrigins("https://iwema.wemabank.com"); // Allow requests from origin
     options.AllowAnyMethod(); // Allow all HTTP methods
     options.AllowAnyHeader(); // Allow all headers
 });
@@ -77,7 +78,7 @@ app.UseSwaggerUI();
 app.UseRateLimiter();
 
 // Call the SeedData method
-await Seeder.SeedData(app.Services);
+await DatabaseInitializer.SeedData(app.Services);
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthentication();

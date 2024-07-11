@@ -25,4 +25,8 @@
     <ProjectReference Include="..\IWema.Domain\IWema.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dashboard\ActivityTracker\" />
+  </ItemGroup>
+
 </Project>

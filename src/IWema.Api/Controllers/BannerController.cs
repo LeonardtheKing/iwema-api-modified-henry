@@ -48,7 +48,7 @@ public class BannerController(IMediator mediator) : BaseController
             return BadRequest(response.Message);
     }
 
-    [Authorize(Roles = Role.ADMIN)]
+   
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {

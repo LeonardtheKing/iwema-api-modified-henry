@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IWema.Infrastructure.Persistence.Seeding;
 
-public class Seeder
+public class DatabaseInitializer
 {
     public static async Task SeedData(IServiceProvider serviceProvider)
     {

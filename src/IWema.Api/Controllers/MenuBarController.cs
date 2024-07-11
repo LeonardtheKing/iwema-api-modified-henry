@@ -4,9 +4,7 @@ using IWema.Application.MenuBars.Command.Update;
 using IWema.Application.MenuBars.Query.GetAll;
 using IWema.Application.MenuBars.Query.GetById;
 using IWema.Application.MenuBars.Query.GetFavourite;
-using IWema.Domain.Entity;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

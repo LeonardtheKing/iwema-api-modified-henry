@@ -26,6 +26,7 @@ namespace IWema.Application.Announcements.Command.Add
             RuleFor(x => x.Content)
                 .NotEmpty().WithMessage("Content is required.")
                 .Must(NotContainSpecialCharacters).WithMessage("Invalid characters.");
+               
         }
 
         private bool BeAValidImage(IFormFile file)
@@ -47,5 +48,6 @@ namespace IWema.Application.Announcements.Command.Add
             var regex = new Regex(@"^[a-zA-Z0-9\s]*$");
             return regex.IsMatch(title);
         }
+
     }
 }
