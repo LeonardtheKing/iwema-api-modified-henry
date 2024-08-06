@@ -1,13 +1,24 @@
 ﻿namespace IWema.Application.Common.DTO;
 
-public class ServiceResponse(string message, bool successful = false)
+public class ServiceResponse
 {
-    public bool Successful { get; set; } = successful;
-    public string Message { get; set; } = message;
+    public bool Successful { get; set; }
+    public string Message { get; set; }
+
+    public ServiceResponse(string message, bool successful = false)
+    {
+        Message = message;
+        Successful = successful;
+    }
 }
 
-public class ServiceResponse<T>(string message, bool successful = false, T response = default)
-    : ServiceResponse(message, successful)
+public class ServiceResponse<T> : ServiceResponse
 {
-    public T Response { get; set; } = response;
+    public T Response { get; set; }
+
+    public ServiceResponse(string message, bool successful = false, T response = default)
+        : base(message, successful)
+    {
+        Response = response;
+    }
 }

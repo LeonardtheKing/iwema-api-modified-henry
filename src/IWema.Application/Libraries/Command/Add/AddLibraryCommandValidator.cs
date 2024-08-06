@@ -45,7 +45,7 @@ namespace IWema.Application.Libraries.Command.Add
             if (file == null)
                 return true; // Allow null, as this is validated by another rule
 
-            var allowedExtensions = new[] { ".png", ".jpg", ".jpeg", ".pdf", ".doc", ".xls", ".txt", ".ppt", ".docx",".xlsx" };
+            var allowedExtensions = new[] { ".png", ".jpg", ".jpeg", ".pdf", ".doc", ".xls", ".txt", ".ppt",".pptx", ".docx",".xlsx" };
             var fileExtension = System.IO.Path.GetExtension(file.FileName).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }

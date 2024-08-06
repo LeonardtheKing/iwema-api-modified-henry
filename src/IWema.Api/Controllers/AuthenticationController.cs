@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace IWema.Api.Controllers;
 
+
 [Route("api/[controller]")]
 [ApiController]
 public class AuthenticationController(IMediator mediator,IOptions<ActiveDirectoryConfigOptions> options) : BaseController
@@ -18,6 +19,7 @@ public class AuthenticationController(IMediator mediator,IOptions<ActiveDirector
     
     [HttpPost]
     [Route("login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] LoginInputModel request)
     {
 
@@ -33,6 +35,7 @@ public class AuthenticationController(IMediator mediator,IOptions<ActiveDirector
 
     [HttpPost]
     [Route("login/admin")]
+    [AllowAnonymous]
     public async Task<IActionResult> LoginAdmin([FromBody] AdminLoginInput request)
     {
 
@@ -48,6 +51,7 @@ public class AuthenticationController(IMediator mediator,IOptions<ActiveDirector
 
     [HttpDelete]
     [Route("refresh-token")]
+    [AllowAnonymous]
     public async Task<IActionResult> LogoutUser(LoginInputModel request)
     {
         var command = new LoginCommand(request.Email, request.Password);

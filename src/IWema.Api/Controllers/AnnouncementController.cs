@@ -13,7 +13,6 @@ namespace IWema.Api.Controllers;
 [Authorize]
 public class AnnouncementController(IMediator mediator) : BaseController
 {
-    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AddAnnouncementInputModel request)
     {

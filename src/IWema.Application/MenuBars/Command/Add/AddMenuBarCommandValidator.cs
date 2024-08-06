@@ -11,15 +11,9 @@ public class AddMenuBarCommandValidator : AbstractValidator<AddMenuBarCommand>
             .NotEmpty();
 
         RuleFor(x => x.Link)
-            .Must(BeAValiLink).WithMessage("This is an invalid link")
-            .NotEmpty();
+           .NotEmpty()
+           .WithMessage("Link is required");
     }
 
-    public static bool BeAValiLink(string value)
-    {
-        if (!value.Contains("http") || !value.Contains("https"))
-            return false;
-
-        return true;
-    }
+ 
 }

@@ -9,7 +9,6 @@ using IWema.Infrastructure.Adapters.SeamlessHR.Services;
 using IWema.Infrastructure.Caching;
 using IWema.Infrastructure.Persistence;
 using IWema.Infrastructure.Persistence.Repositories;
-using IWema.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -60,9 +59,7 @@ public static class ServiceExtension
             .AddScoped<IJwtTokenManager, JwtTokenManager>()
             .AddScoped<IActiveDirectoryService, ActiveDirectoryService>()
             .AddScoped<IApplicationUserRepository, ApplicationUserRepository>()
-            .AddScoped<IBlogRepository, BlogRepository>()
-            .AddScoped<IUserSessionRepository, UserSessionRepository>();
-
+            .AddScoped<IBlogRepository, BlogRepository>();
 
         services.AddHttpClient("iwema", client =>
         {

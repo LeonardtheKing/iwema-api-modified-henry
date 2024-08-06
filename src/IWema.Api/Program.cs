@@ -4,7 +4,6 @@ using IWema.Infrastructure;
 using IWema.Infrastructure.Adapters.SeamlessHR;
 using IWema.Infrastructure.Persistence.Seeding;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;
@@ -55,11 +54,11 @@ var app = builder.Build();
 app.UseCors(options =>
 {
     //options.AllowAnyOrigin(); // Allow requests from any origin
-    options.WithOrigins("https://iwema.wemabank.com"); // Allow requests from origin
+    options.WithOrigins("https://iwema.wemabank.com", "http://localhost:3000");  // Allow requests from origin
     options.AllowAnyMethod(); // Allow all HTTP methods
     options.AllowAnyHeader(); // Allow all headers
 });
-//app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.RemoveSensitiveHeaders();
 app.SerilogConfiguration();
 

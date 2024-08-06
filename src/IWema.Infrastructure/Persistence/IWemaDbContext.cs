@@ -27,6 +27,6 @@ public class IWemaDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Library> Libraries { get; set; }
     public DbSet<BlogEntity> BlogEntities { get; set; }
     public DbSet<AnnouncementDto> AnnouncementDtos { get; set; }
-    public DbSet<UserLoginSession> UserLoginSessions { get; set; }
+   
 
 }

@@ -40,7 +40,7 @@ public class UpcomingEventsCommandValidator : AbstractValidator<AddUpcomingEvent
 
         bool IsValidExtension(string fileName)
         {
-            var allowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png" };
+            var allowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png", ".webp" };
             var fileExtension = Path.GetExtension(fileName).ToLowerInvariant();
             return allowedExtensions.Contains(fileExtension);
         }

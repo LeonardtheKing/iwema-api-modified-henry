@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dashboard\**" />
     <Compile Remove="Image\**" />
+    <EmbeddedResource Remove="Dashboard\**" />
     <EmbeddedResource Remove="Image\**" />
+    <None Remove="Dashboard\**" />
     <None Remove="Image\**" />
   </ItemGroup>
 
@@ -23,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IWema.Domain\IWema.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dashboard\ActivityTracker\" />
   </ItemGroup>
 
 </Project>
